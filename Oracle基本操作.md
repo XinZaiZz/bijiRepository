@@ -338,7 +338,7 @@ Oracle安装后配置相应环境变量：
 
 ##### 单行函数
 
-lower()、upper()、initcap()（第一个字母为大写）;
+lower()、upper()、initcap()-->指（第一个字母为大写）;
 
 `select lower('ABC'),upper('abc'),initcap('ABC abc')from dual; `
 

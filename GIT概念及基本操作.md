@@ -102,7 +102,7 @@ git下载地址：<[Git (git-scm.com)](https://git-scm.com/)>,安装时直接下
 
 ![image-20210720151115815](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210720151115815.png)
 
-添加文件add，提交问价commit
+添加文件add，提交文件commit
 
 首先创建需要的文件：
 
