@@ -347,6 +347,33 @@ java为单继承存在局限性，实现类可以多个，所以用实现类更�
 
 实现的方式可以体验一种共享数据的概念（只需要创建一个线程对象），而继承方式中每一次都会创建一个新的线程对象。
 
+#### 线程池
+
+```java
+public class ThreadPool {
+    public static void main(String[] args) {
+        //corePoolSize:线程池核心线程大小，
+        // maximumPoolSize:线程池最大线程数量，
+        // keepAliveTime:空闲线程存活时间，
+        // unit:空间线程存活时间单位，
+        // workQueue:工作队列，
+        // threadFactory:线程工厂，
+        // handler:拒绝策略
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3, 5, 1L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(3), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+
+        for (int i = 0 ;i < 4;i++){
+            threadPoolExecutor.execute(()->{
+                System.out.println(Thread.currentThread().getName() + "===>办理业务");
+            });
+        }
+    }
+}
+```
+
+![image-20210825105457764](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210825105457764.png)
+
+
+
 #### 线程优先级
 
 ![image-20210727175738139](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727175738139.png)
