@@ -41,7 +41,7 @@ public class TestIO {
 
 ![image-20210726201216629](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726201216629.png)
 
-#####构建File对象：
+##### 构建File对象：
 
 ```java
 public class TestIO2 {
@@ -271,7 +271,7 @@ public class TestDir03 {
 
 ![image-20210727094847211](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727094847211.png)
 
-#####InputStream 字节输入流
+##### InputStream 字节输入流
 
 ###### FileInputStream
 
@@ -314,7 +314,7 @@ public class IOputStreamTest {
 
 
 
-#####OutputStream 字节输出流
+##### OutputStream 字节输出流
 
 ###### FileOutputStream
 
@@ -508,7 +508,7 @@ public class FileReaderTest {
 
 
 
-#####Writer
+##### Writer
 
 ###### FileWriter：public void write(String str)//一次写多个字符，将b数组中的所有字符写入输出流
 

@@ -19,7 +19,7 @@
 
 进程作为资源分配的单位，系统在运行时会为每个进程分配不同的内存区域
 
-###线程（Thread）
+### 线程（Thread）
 
 在某些进程内部还需要同时执行多个子任务称之为线程
 
@@ -96,7 +96,7 @@ public static void main(String[] args) {
 
 ![image-20210727175448252](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727175448252.png)
 
-####创建线程一：继承Thread类
+#### 创建线程一：继承Thread类
 
 ```java
 /*
@@ -169,7 +169,7 @@ static Thread currentThread()：返回当前线程。
 
 yield():释放当前CPU的执行权，可能又会被抢回来
 
-join():在线程a中调用线程b的join(),此时线程a就进入到阻塞状态，知道b执行完后a才结束阻塞状态
+join():在线程a中调用线程b的join(),此时线程a就进入到阻塞状态，直到b执行完后a才结束阻塞状态
 
 stop():已过时，当执行此方法是强制结束线程
 
