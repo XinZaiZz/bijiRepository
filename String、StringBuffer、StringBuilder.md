@@ -105,7 +105,7 @@ StringBuilder的主要`StringBuilder`是`append`和`insert`方法，它们是重
 
 每个字符串构建器都有一个容量。  只要字符串构建器中包含的字符序列的长度不超过容量，则不需要分配新的内部缓冲区。  如果内部缓冲区溢出，则会自动变大。 
 
-StringBuilder的`StringBuilder`不能安全使用多线程。 如果需要同步，  [那么](../../java/lang/StringBuffer.html)建议使用[`StringBuffer`]。 
+StringBuilder的`StringBuilder`不能安全使用多线程。 如果需要同步，  [那么](../../java/lang/StringBuffer.html)建议使用[`StringBuffer`](../../java/lang/StringBuffer.html) 。 
 
 **相同点**：
 

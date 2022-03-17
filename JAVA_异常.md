@@ -178,7 +178,7 @@ System.out.println(str.length());
         }
 ```
 
-#####常见异常：ArrayIndexOutOfBoundsException(数组越界异常)
+##### 常见异常：ArrayIndexOutOfBoundsException(数组越界异常)
 
 ```java
         int[] a = new int[4];

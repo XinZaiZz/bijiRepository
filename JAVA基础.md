@@ -650,6 +650,7 @@ public class TestRecursion {
        public static void main(String[] args) {
            // 多态的引用，就是向上转型
            Animals dog = new Dog();
+           //调用子类方法。输出狗在吃骨头
            dog.eat();
            
            Animals cat = new Cat();
@@ -694,11 +695,7 @@ public class TestRecursion {
 
 # 接口
 
-**问题描**
-
-
-
-**述：**
+**问题描述：**
 
  现在接口中需要抽取一个公有的方法，用来解决默认方法中代码重复的问题。
 ​ 但是这个共有的方法不能让实现类实现，所以应该设置为私有化。

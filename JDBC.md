@@ -390,3 +390,19 @@ public class JDBCLoginPreparedTest {
 ![image-20210728220640513](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210728220640513.png)
 
 使用预编译时遇到条件查询或插入需要用`?` 作为占位符，并从下标1开始赋值。
+
+安装MYSQL:
+
+第一步：去官网下载安装
+第二步：先解压，然后在mysql下创建一个my.ini文件，更改my.ini文件里面的前两行安装目录，第二行加上\data，my.ini文件不能多一个符号或者少一个符号，在path（环境变量里面）加上mysql路径（;E:\mysql\mysql-8.0.25-winx64\bin）
+(填写自己的mysql安装路径)
+第三步：进入命令指示符（在bin目录下运行cmd）,
+输入mysqld --initialize-insecure --user=mysql,初始化数据库，并设置默认root为空，初始化完成后，在mysql根目录中会自动生成data文件
+再输入mysqld -install,为windows安装mysql服务，默认服务名为mysql
+出现service successfully installed.表示配置完成
+启动数据库net start mysql,
+输入mysql -u root -p ,不用输入密码直接回车
+出现mysql>配置完成
+输入(alter user user() identified by "密码";)
+mysql退出 mysql>quit;
+输入net stop mysql关闭数据库
