@@ -132,11 +132,12 @@ Eureka是Netflix的一个子模块，也是核心模块之一。Eureka是一个�
 导入eureka服务依赖：
 
 ```xml
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
-            <version>1.4.7.RELEASE</version>
-        </dependency>
+<!-- 导入eureka服务器依赖 -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    <version>3.0.4</version>
+</dependency>
 ```
 
 编写配置文件：
@@ -179,12 +180,12 @@ public class EurekaServer_7001 {
 在8001下导入依赖：
 
 ```xml
-        <!-- eureka依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>3.0.4</version>
-        </dependency>
+<!-- eureka依赖 -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    <version>3.0.4</version>
+</dependency>
 ```
 
 编写配置：
@@ -335,7 +336,7 @@ eureka:
 * Zookeeper保证的是CP;
 * Eureka保证的是AP;
 
-### Ribbon
+## Ribbon
 
 * Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡的工具。
 
@@ -384,7 +385,7 @@ controller：
 | RandomRule                | public class RandomRule extends AbstractLoadBalancerRule     | 随机选择一个server                                           | 在index上随机，选择index对应位置的server                     |
 | ZoneAvoidanceRule         | public class ZoneAvoidanceRule extends PredicateBasedRule    | 复合判断server所在区域的性能和server的可用性选择server       | 使用ZoneAvoidancePredicate和AvailabilityPredicate来判断是否选择某个server，前一个判断判定一个zone的运行性能是否可用，剔除不可用的zone（的所有server），AvailabilityPredicate用于过滤掉连接数过多的Server。 |
 
-注意：** `FooConfiguration`必须是`@Configuration`，但请注意，它不在主应用程序上下文的`@ComponentScan`中，否则将由所有`@RibbonClients`共享。如果您使用`@ComponentScan`（或`@SpringBootApplication`），则需要采取措施避免包含（例如将其放在一个单独的，不重叠的包中，或者指定要在`@ComponentScan`）。**
+注意： `FooConfiguration`必须是`@Configuration`，但请注意，它不在主应用程序上下文的`@ComponentScan`中，否则将由所有`@RibbonClients`共享。如果您使用`@ComponentScan`（或`@SpringBootApplication`），则需要采取措施避免包含（例如将其放在一个单独的，不重叠的包中，或者指定要在`@ComponentScan`）。
 
 编写自定义Ribbon规则配置类：
 
@@ -570,12 +571,12 @@ Feign，主要是社区版，大家都习惯面向接口编程。这个是很多
 1、创建springcloud-consumer-fdept-feign模块并拷贝springcloud-consumer-dept-80模块下的pom.xml，resource，以及java代码到springcloud-consumer-feign模块，并添加feign依赖。
 
 ```xml
-    <!-- feign依赖 -->
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-openfeign</artifactId>
-        <version>2.2.5.RELEASE</version>
-    </dependency>
+<!-- feign依赖 -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+    <version>2.2.5.RELEASE</version>
+</dependency>
 ```
 
 2、在springcloud-api中创建服务接口且在api中也引入feign依赖：
@@ -688,13 +689,13 @@ public class FeignDeptConsumer_80 {
 
 ```
 
-** `Feign和Ribbon二者对比，前者显现出面向接口编程特点，代码看起来更清爽，而且Feign调用方式更符合我们之前在做SSM或者SprngBoot项目时，Controller层调用Service层的编程习惯！`**
+ `Feign和Ribbon二者对比，前者显现出面向接口编程特点，代码看起来更清爽，而且Feign调用方式更符合我们之前在做SSM或者SprngBoot项目时，Controller层调用Service层的编程习惯！ `
 
 feign做负载均衡结果和ribbon一样（默认还是轮询算法调用服务提供者）：
 
 ![image-20211111190934564](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20211111190934564.png)
 
-### Hystrix（服务熔断）
+## Hystrix（服务熔断）
 
 > 分布式系统面临的问题
 
@@ -704,7 +705,7 @@ feign做负载均衡结果和ribbon一样（默认还是轮询算法调用服务
 
 多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其他的微服务，这就是所谓的“扇出”，如果扇出的链路上**某个微服务的调用响应时间过长，或者不可用**，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“雪崩效应”。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201121144830148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5MTk4MA==,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201121144830148.png)
 
 对于高流量的应用来说，单一的后端依赖可能会导致所有服务器上的所有资源都在几十秒内饱和。比失败更糟糕的是，这些应用程序还可能导致服务之间的延迟增加，备份队列，线程和其他系统资源紧张，导致整个系统发生更多的级联故障，**这些都表示需要对故障和延迟进行隔离和管理，以达到单个依赖关系的失败而不影响整个应用程序或系统运行**。
 
@@ -764,12 +765,12 @@ feign做负载均衡结果和ribbon一样（默认还是轮询算法调用服务
 导入hystrix依赖：
 
 ```xml
-        <!-- 熔断机制hystrix依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-            <version>2.2.9.RELEASE</version>
-        </dependency>
+<!-- 熔断机制hystrix依赖 -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+    <version>2.2.9.RELEASE</version>
+</dependency>
 ```
 
 编写接口：
@@ -1171,8 +1172,6 @@ zuul:
 ![image-20211113170158849](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20211113170158849.png)
 
 **我们看到，微服务名称被替换并隐藏，换成了我们自定义的微服务名称mydept，同时加上了前缀youxin，这样就做到了对路由访问的加密处理！**
-
-
 
 ## Spring Cloud Config 分布式配置
 

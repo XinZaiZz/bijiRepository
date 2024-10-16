@@ -208,7 +208,7 @@ remove the file manually to continue.
 
 
 
-#####比对工作区与暂存区：
+##### 比对工作区与暂存区：
 
 在test.txt文件中修改：![image-20210720165112338](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210720165112338.png)
 
@@ -371,3 +371,79 @@ idea进行克隆操作：
 ![image-20210721113909666](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210721113909666.png)
 
 ![image-20210721113510386](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210721113510386.png)
+
+
+
+### IDEA上传git问题解决
+
+idea中，发布项目到Git中，当时按照这样的流程添加Git，然后push，提示：push to origin/master war rejected"。
+
+解决方案如下：
+
+1.切换到自己项目所在的目录，右键选择GIT BASH Here
+
+2.在terminl窗口中依次输入命令：
+
+git pull
+
+git pull origin master
+
+git pull origin master --allow-unrelated-histories
+
+3.在idea中重新push自己的项目，成功！！！
+
+### IDEA上传Git远程库:
+
+#### 1、创建远程仓库：
+
+![image-20220325092020630](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325092020630.png)
+
+#### 2、创建本地仓库：
+
+![image-20220325092122340](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325092122340.png)
+
+然后所有文件名都会变红：
+
+![image-20220325092213510](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325092213510.png)
+
+#### 3、项目提交本地仓库：
+
+![image-20220325092401032](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325092401032.png)
+
+先add，然后commit：
+
+![image-20220325092647495](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325092647495.png)
+
+**注意：如果需要填写作者信息，需要先在控制台获取git的用户名和邮箱**
+
+```bash
+#获取用户名
+git config user.name
+
+#获取用户邮箱
+git config user.email
+```
+
+作者信息填写规则：
+
+[user.name]<[user.email]>
+
+如：
+
+![image-20220325093539206](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325093539206.png)
+
+#### 4、push远程仓库：
+
+![image-20220325093815375](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325093815375.png)
+
+填写ssh地址：
+
+![image-20220325093940919](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325093940919.png)
+
+继续执行直到提示：
+
+![image-20220325094021510](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325094021510.png)
+
+#### 成功！
+
+![image-20220325094130059](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220325094130059.png)

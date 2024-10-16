@@ -39,9 +39,9 @@ public class TestIO {
 
 输出：
 
-![image-20210726201216629](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726201216629.png)
+![image-20220318102513878](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220318102513878.png)
 
-#####构建File对象：
+##### 构建File对象：
 
 ```java
 public class TestIO2 {
@@ -64,7 +64,7 @@ public class TestIO2 {
 }
 ```
 
-![image-20210726202116437](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726202116437.png)
+![image-20220321093059243](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321093059243.png)
 
 ##### 相对路径和绝对路径
 
@@ -88,11 +88,9 @@ public class TestIO03 {
 }
 ```
 
-![image-20210726202728050](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726202728050.png)
+![image-20220321094355864](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321094355864.png)
 
 File对象可以构建一个不存在的文件
-
-![image-20210726202951698](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726202951698.png)
 
 ```java
 public class TestIO04 {
@@ -106,16 +104,21 @@ public class TestIO04 {
     public static void main(String[] args) {
         //基本信息
         File file = new File("D:\\IdeaProject\\demo20210726\\src\\环境.txt");
+        //获取当前file对象名称
         System.out.println("名称：" + file.getName());
+        //获取路径
         System.out.println("路径：" + file.getPath());
+        //获取绝对路径
         System.out.println("绝对路径：" + file.getAbsolutePath());
+        //获取父类对象
         System.out.println("父路径：" + file.getParent());
+        //获取父类对象的名称
         System.out.println("父对象：" + file.getParentFile().getName());
     }
 }
 ```
 
-![image-20210726204004221](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726204004221.png)
+![image-20220321095420538](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321095420538.png)
 
 ##### 文件状态
 
@@ -129,32 +132,63 @@ public class TestIO05 {
     *   文件夹：isDirectory()
     * */
     public static void main(String[] args) {
+        //创建file对象
         File file = new File("src/环境.txt");
+        //判断文件是否存在，存在返回true，不存在返回false
         System.out.println("文件存在？"+file.exists());
+        //判断file对象是否是文件，是返回true，不是返回false
         System.out.println("是否是文件？"+file.isFile());
+        //判断file对象是否是文件夹，是返回true，不是返回false
         System.out.println("是否是文件夹？"+file.isDirectory());
     }
 }
 ```
 
-![image-20210726204623589](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726204623589.png)
+![image-20220321095637888](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321095637888.png)
 
 ##### 其他信息
 
 ```java
-/*
+public class TestIO06 {
+    /*
     * 其他信息
     * length():字节数
     * */
+    public static Long length = 0L;
     public static void main(String[] args) {
-        File file = new File("D:\\IdeaProject\\demo20210726\\src\\环境.txt");
+        File file = new File("D:/IdeaProject/demo20210726/src/环境.txt");
+        //获取file对象字节数
         System.out.println(file.length());
-        file = new File("D:\\IdeaProject\\demo20210726\\src");
+        file = new File("D:/IdeaProject/demo20210726/src");
+        //文件夹不能获取字节数
         System.out.println(file.length());
+        //通过dirLength递归方法获取文件夹字节大小
+        System.out.println(dirLength(file));
+
     }
+
+    public static Long dirLength(File file) {
+        if (file != null || file.exists()) {
+            if (file.isFile()) {
+                //如果File对象是文件，就将length累加
+                length += file.length();
+            } else {
+                //如果不是文件，先获取文件夹目录
+                File[] files = file.listFiles();
+                for (File fileChild : files
+                ) {
+//                System.out.println(fileChild.getName());
+                    //递归
+                    dirLength(fileChild);
+                }
+            }
+        }
+        return length;
+    }
+}
 ```
 
-![image-20210726205154373](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726205154373.png)
+![image-20220321115820884](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321115820884.png)
 
 ```java
 /*
@@ -163,13 +197,15 @@ public class TestIO05 {
     * */
     public static void main(String[] args) throws IOException {
         File file = new File("D:\\IdeaProject\\demo20210726\\src\\test.txt");
+        //创建文件，如果不存在就创建成功并返回true,如果存在就创建不成功并返回false
         boolean newFile = file.createNewFile();
         System.out.println(newFile);
+        //删除文件
         file.delete();
     }
 ```
 
-![image-20210726205457230](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210726205457230.png)
+![image-20220321101646554](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321101646554.png)
 
 **不能创建文件夹**
 
@@ -181,17 +217,23 @@ public class TestDir {
     * 2.mkdirs()：上级目录可以不存在，不存在一同来创建
     * */
     public static void main(String[] args) {
-        File dir = new File("D:/IdeaProject/demo20210726/src/test");
-        //创建目录
+        File dir = new File("D:/IdeaProject/demo20210726/src/test01");
+        //创建目录，不存在返回true，如果已经存在就返回false
         boolean mkdir = dir.mkdir();
+
+        //删除文件夹
+        dir.delete();
         boolean mkdirs = dir.mkdirs();
         System.out.println(mkdir);
         System.out.println(mkdirs);
+
+        //删除文件夹
+        dir.delete();
     }
 }
 ```
 
-![image-20210727091214764](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727091214764.png)
+![image-20220321102100508](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321102100508.png)
 
 ```java
 public class TestDir02 {
@@ -201,8 +243,8 @@ public class TestDir02 {
     * 1.list():列出下一级名称
     * 2.listFiles()：列出下一级File对象
     * 打印子孙级目录和名称
-    * */    
-	public static void main(String[] args) {
+    * */
+    public static void main(String[] args) {
         File dir = new File("D:/IdeaProject/demo20210726/src");
 
         //列出下一级名称
@@ -216,6 +258,8 @@ public class TestDir02 {
         File[] files = dir.listFiles();
         for (File file: files
              ) {
+            //这里getName方法获取后跟上面返回的subName一样
+//            System.out.println(file.getName());
             System.out.println(file);
         }
         printName(dir,0);
@@ -236,10 +280,11 @@ public class TestDir02 {
             }
         }
     }
+
 }
 ```
 
-![image-20210727093933770](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727093933770.png)
+![image-20220321102516213](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321102516213.png)
 
 **统计文件夹大小**
 
@@ -269,9 +314,9 @@ public class TestDir03 {
 }
 ```
 
-![image-20210727094847211](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727094847211.png)
+![image-20220321102704202](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321102704202.png)![image-20220321102719494](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321102719494.png)
 
-#####InputStream 字节输入流
+##### InputStream 字节输入流
 
 ###### FileInputStream
 
@@ -304,7 +349,7 @@ public class IOputStreamTest {
         byte[] bytes = new byte[1024];
         int count = 0;
         while ((count = fileInputStream.read(bytes)) != -1){
-            System.out.println(new String(bytes,0,count));
+            System.out.println(new String(new String(bytes,0, count).getBytes(), "UTF-8"));
         }
         //关闭
         fileInputStream.close();
@@ -312,9 +357,9 @@ public class IOputStreamTest {
 }
 ```
 
+![image-20220321161423465](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321161423465.png)
 
-
-#####OutputStream 字节输出流
+##### OutputStream 字节输出流
 
 ###### FileOutputStream
 
@@ -342,6 +387,8 @@ public class OutputStreamTest {
 }
 ```
 
+![image-20220321162150361](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321162150361.png)
+
 实现将aaa.txt中内容复制到bbb.txt中：
 
 ```java
@@ -350,10 +397,18 @@ public class OutputStreamTest {
 * */
 public class IOputStreamTest {
     public static void main(String[] args) throws IOException {
+        File i_file = new File("d:/aaa.txt");
+        File o_file = new File("d:/bbb.txt");
+
         //文件字节输入流
-        FileInputStream fileInputStream = new FileInputStream("d:/aaa.txt");
+        FileInputStream fileInputStream = new FileInputStream(i_file.getAbsolutePath());
+//        FileInputStream fileInputStream = new FileInputStream("d:/aaa.txt");
+        /*if ( ! o_file.exists()) {
+            o_file.createNewFile();
+        }*/
         //文件字节输出流
-        FileOutputStream fileOutputStream = new FileOutputStream("d:/bbb.txt",true);
+        //如果目标文件不存在就创建目标文件
+        FileOutputStream fileOutputStream = new FileOutputStream(o_file.getAbsolutePath(),true);
         //一边读，一边写
         byte[] bytes = new byte[1024];
         int count = 0;
@@ -415,6 +470,40 @@ public class BufferedOutputStreamTest{
 }
 ```
 
+```java
+/**
+ * @author youxin
+ * @program demo20210726
+ * @description 用字节缓冲流复制文件
+ * @date 2022-03-21 16:42
+ */
+public class BufferIOputStreamTest {
+    public static void main(String[] args) throws IOException {
+        //创建FileInputStream和FileOutputStream对象
+        FileInputStream fis = new FileInputStream("d:/aaa.txt");
+        FileOutputStream fos = new FileOutputStream("D:/bbb.txt", true);
+
+        //用FileInputStream和FileOutputStream创建缓冲对象
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+        //记录读取的值
+        int data = 0;
+
+        while ((data = bis.read()) != -1){
+            bos.write((char)data);
+            //将缓冲区刷新进硬盘中
+            bos.flush();
+        }
+        bis.close();
+        bos.close();
+        System.out.println("复制完毕！");
+    }
+}
+```
+
+![image-20220321165604776](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321165604776.png)
+
 ##### 对象流
 
 readObject()，writeObject(Object obj)
@@ -462,7 +551,7 @@ public class ObjectInputStreamTest {
 }
 ```
 
-![image-20210727113901227](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727113901227.png)
+![image-20220321165807765](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321165807765.png)
 
 序列化版本号ID，保证序列化的类和反序列化的类是同一个类
 
@@ -474,11 +563,11 @@ public class ObjectInputStreamTest {
 
 #### 字符流
 
-当文件中有中文是字节流就不能读取了
+当文件中有中文时字节流就不能读取了
 
 ##### Reader
 
-###### FileReader：public int read(char[] c)//读取多个字符，将督导的内容存入c数组，返回实际读到的字符数；如果到达文件的尾部，则返回-1
+**FileReader：public int read(char[] c)//读取多个字符，将督导的内容存入c数组，返回实际读到的字符数；如果到达文件的尾部，则返回-1**
 
 ```java
 /*
@@ -506,11 +595,11 @@ public class FileReaderTest {
 }
 ```
 
+![image-20220321171107572](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321171107572.png)
 
+##### Writer
 
-#####Writer
-
-###### FileWriter：public void write(String str)//一次写多个字符，将b数组中的所有字符写入输出流
+**FileWriter：public void write(String str)//一次写多个字符，将b数组中的所有字符写入输出流**
 
 ```java
 /*
@@ -521,8 +610,9 @@ public class FileWriterTest {
         //创建FileWriter对象
         FileWriter fw = new FileWriter("d:/aaa.txt",true);
         //写入
-        fw.write("，昨天看起来天气不好！");
-//        fw.append(",前天天气怎么样？",0,new String(",前天天气怎么样？").length());
+        fw.write("，昨天看起来天气不好！\r\n");
+        //字符串追加
+        fw.append(",前天天气怎么样？",0,new String(",前天天气怎么样？").length());//会自动换行
         fw.flush();
         //关闭
         fw.close();
@@ -538,7 +628,7 @@ public class FileWriterTest {
 * */
 public class FileCopyTest {
     public static void main(String[] args) throws IOException {
-        //创建两个流
+        //创建两个字符流
         FileWriter fw = new FileWriter("d:/bbb.txt");
         FileReader fr = new FileReader("d:/aaa.txt");
         //读写
@@ -556,7 +646,9 @@ public class FileCopyTest {
 
 字符流进行读取时是按编码进行字符读取，而图片或声音是二进制信息，不能用字符流读取。。
 
-##### 字符缓冲流：BufferedReader/BufferedWriter 可以指定缓冲区大小，也可以使用默认的
+##### 字符缓冲流：
+
+BufferedReader/BufferedWriter 可以指定缓冲区大小，也可以使用默认的
 
 ```java
 /*
@@ -606,7 +698,7 @@ public class BufferedWriterTest {
 }
 ```
 
-![image-20210727133317924](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727133317924.png)
+![image-20220321172457995](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321172457995.png)
 
 #### 打印流：PrintWriter
 
@@ -632,10 +724,42 @@ public class PrintWriterTest {
 }
 ```
 
-![image-20210727133809432](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210727133809432.png)
+![image-20220321172535535](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220321172535535.png)
 
 #### 转换流：InputStreamReader/OutputStreamWriter
 
 可将字节流转换为字符流
 
 可设置字符的编码方式
+
+```java
+/*
+* 使用字节缓冲流来读取文件
+* */
+public class BufferedInputStreamTest {
+
+    public static void main(String[] args) throws IOException {
+        //创建缓冲流
+        FileInputStream fis = new FileInputStream("d:/aaa.txt");
+        //将字节输入流转为字符读取流
+        InputStreamReader isr = new InputStreamReader(fis);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        //读取
+        int data = 0;
+        //如果read读取到为空后返回-1
+        /*while ((data = bis.read()) != -1){
+            System.out.print((char)data);
+        }*/
+        //本来用字节输入流读取中文是显示乱码的，但是用了转换流后就可以输出中文
+        while ((data = isr.read()) != -1){
+            System.out.print((char)data);
+        }
+        //关闭
+        fis.close();
+        bis.close();
+        isr.close();
+    }
+}
+```
+
+![image-20220322092522761](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220322092522761.png)

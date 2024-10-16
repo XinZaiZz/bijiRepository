@@ -424,7 +424,7 @@ stop()方法
 
 ##### volatile
 
-volatile关键字的目的是高数虚拟机：
+volatile关键字的目的是告诉虚拟机：
 
 每次访问变量时，总是获取主内存的最新值
 
@@ -467,7 +467,7 @@ public class ThreadPool {
 
 ![image-20210730175943826](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210730175943826.png)
 
-####四种常见的线程池：
+#### 四种常见的线程池：
 
 CachedThreadPool:可缓存的线程池，该线程池中没有核心线程，非核心线程的数量为Integer.max_value，就是无限大，当有需要时创建线程来执行任务，没有需要时回收线程，适用于耗时少，任务量大的情况。
 

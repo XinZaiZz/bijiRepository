@@ -2,11 +2,11 @@
 
 ![u](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210722090829055.png)
 
-####Oracle数据库概念
+#### Oracle数据库概念
 
 Oracle Database，又名Oracle RDBMS，或简称Oracle。是[甲骨文公司](https://baike.baidu.com/item/甲骨文公司/430115)的一款[关系数据库管理系统](https://baike.baidu.com/item/关系数据库管理系统/11032386)。它是在数据库领域一直处于领先地位的产品。可以说Oracle数据库系统是目前世界上流行的[关系数据库](https://baike.baidu.com/item/关系数据库/1237340)管理系统，系统[可移植性](https://baike.baidu.com/item/可移植性/6931884)好、使用方便、功能强，适用于各类大、中、小[微机](https://baike.baidu.com/item/微机/5511409)环境。它是一种高效率的、可靠性好的、适应高[吞吐量](https://baike.baidu.com/item/吞吐量/157092)的数据库方案。
 
-####系统简介
+#### 系统简介
 
 ORACLE[数据库系统](https://baike.baidu.com/item/数据库系统)是美国ORACLE公司（[甲骨文](https://baike.baidu.com/item/甲骨文/471435)）提供的以[分布式数据库](https://baike.baidu.com/item/分布式数据库)为核心的一组软件产品，是目前最流行的客户/服务器([CLIENT/SERVER](https://baike.baidu.com/item/CLIENT%2FSERVER/1504488))或[B/S](https://baike.baidu.com/item/B%2FS/219020)[体系结构](https://baike.baidu.com/item/体系结构)的数据库之一。比如SilverStream就是基于数据库的一种[中间件](https://baike.baidu.com/item/中间件/452240)。ORACLE数据库是目前世界上使用最为广泛的[数据库管理系统](https://baike.baidu.com/item/数据库管理系统)，作为一个通用的数据库系统，它具有完整的[数据管理](https://baike.baidu.com/item/数据管理)功能；作为一个关系数据库，它是一个完备关系的产品；作为分布式数据库它实现了[分布式处理](https://baike.baidu.com/item/分布式处理)功能。但它的所有知识，只要在一种机型上学习了ORACLE知识，便能在各种类型的机器上使用它。
 
@@ -14,7 +14,7 @@ Oracle数据库最新版本为Oracle Database 20c。Oracle数据库12*c* 引入�
 
 #### Oracle基本数据类型：
 
-#####字符类型
+##### 字符类型
 
 字符串数据类型还可以依据存储空间分为固定长度类型（CHAR/NCHAR) 和可变长度类型（VARCHAR2/NVARCHAR2)两种.
 固定长度：是指虽然输入的字段值小于该字段的限制长度，但是实际存储数据时，会先自动向右补足空格后，才将字段值的内容存储到数据块中。
@@ -94,13 +94,13 @@ DDL：Data Definition Language 数据定义语言（创建表，删除表等）�
 
 DCL：Data Control Language 数据控制语言（访问授权等）
 
-#####SQL语句与SQL * PLUS差异
+##### SQL语句与SQL * PLUS差异
 
 sql：一种语言，ANSI标准，关键字不能缩写，使用语句控制数据库中的表的定义信息和表中数据；
 
 sql*plus：一种环境，oracle的特性之一，关键字可以缩写，命令不能改变数据库中的数据的值，集中运行。
 
-#####SQL语句中不区分大小写，但如果算作字符串的话严格区分大小写。'\\' 表示一个转义字符。
+**SQL语句中不区分大小写，但如果算作字符串的话严格区分大小写。'\\' 表示一个转义字符。**
 
 #### Oracle安装
 
@@ -200,7 +200,7 @@ Oracle安装后配置相应环境变量：
 
 #### 基本SQL-SELECT语句
 
-######在SQL中字符串用单引号，只有别名用的是双引号
+###### 在SQL中字符串用单引号，只有别名用的是双引号
 
 `desc employees;` 查看employees表中属性列：
 
